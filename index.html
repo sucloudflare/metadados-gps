@@ -57,11 +57,23 @@
     </section>
 
     <!-- Upload de imagens -->
-    <section id="upload-section" aria-label="Upload de imagens">
-      <h2>📤 Selecione suas Imagens</h2>
-      <input type="file" id="file-input" accept="image/*" multiple aria-label="Selecionar imagens">
-      <p class="note">Formatos suportados: JPG, JPEG, PNG. GPS precisa estar ativado na câmera.</p>
-    </section>
+   <section id="upload-section" aria-label="Upload de imagens">
+  <h2>📤 Selecione suas Imagens</h2>
+  <input
+    type="file"
+    id="file-input"
+    accept="image/*"
+    multiple
+    aria-label="Selecionar imagens"
+  />
+  <p class="note">
+    Formatos suportados: JPG, JPEG, PNG. GPS precisa estar ativado na câmera.
+  </p>
+  <p class="note" style="background-color: #e0f7fa; border: 1px solid #00acc1; padding: 10px; border-radius: 5px;">
+    📱 <strong>No celular:</strong> ao escolher a imagem, clique em <strong>"Arquivos"</strong> ou <strong>"Gerenciador de Arquivos"</strong> — <em>não</em> use "Galeria" ou "Google Fotos". Isso garante que os metadados GPS da imagem sejam lidos corretamente.
+  </p>
+</section>
+
 
     <!-- Galeria das imagens carregadas -->
     <section id="images-section" aria-labelledby="images-title">
