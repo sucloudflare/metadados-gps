@@ -1,5 +1,3 @@
-// script.js
-
 // Inicializa o mapa no mundo
 const map = L.map('map').setView([0, 0], 2);
 
@@ -10,7 +8,7 @@ L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
 
 const fileInput = document.getElementById('file-input');
 const imageList = document.getElementById('image-list');
-const message = document.getElementById('message');
+const message = document.getElementById('messages-section');
 
 let markers = [];
 
@@ -55,16 +53,17 @@ fileInput.addEventListener('change', () => {
         tags = null;
       }
 
+      // Cria a imagem na galeria
+      const img = document.createElement('img');
+      img.src = URL.createObjectURL(file);
+      img.alt = file.name;
+      imageList.appendChild(img);
+
       const lat = tags?.GPSLatitude;
       const latRef = tags?.GPSLatitudeRef;
       const lon = tags?.GPSLongitude;
       const lonRef = tags?.GPSLongitudeRef;
       const dateTime = tags?.DateTimeOriginal || tags?.DateTime;
-
-      const img = document.createElement('img');
-      img.src = URL.createObjectURL(file);
-      img.alt = file.name;
-      imageList.appendChild(img);
 
       if (lat && latRef && lon && lonRef) {
         anyLocationFound = true;
@@ -89,12 +88,10 @@ fileInput.addEventListener('change', () => {
         if (anyLocationFound) {
           const group = new L.featureGroup(markers);
           map.fitBounds(group.getBounds().pad(0.5));
-          
-          // Força o mapa a atualizar o tamanho — ajuda no mobile
+
           setTimeout(() => {
             map.invalidateSize();
           }, 200);
-          
         } else {
           message.textContent = 'Nenhuma localização GPS encontrada nas fotos selecionadas.';
           map.setView([0, 0], 2);

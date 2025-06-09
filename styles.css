@@ -1,3 +1,5 @@
+/* --- CSS --- */
+
 /* Reset básico */
 * {
   margin: 0;
@@ -109,11 +111,12 @@ section h2 {
 
 /* Mapa */
 #map {
-  height: 400px;
+  height: 400px; /* altura fixa para desktop */
   width: 100%;
   border-radius: 8px;
   border: 2px solid #2980b9;
   box-shadow: 0 3px 8px rgb(0 0 0 / 0.1);
+  transition: height 0.3s ease;
 }
 
 /* Mensagens */
@@ -142,5 +145,10 @@ section h2 {
 
   .image-gallery img {
     height: 80px;
+  }
+
+  /* Aumenta a altura do mapa no celular para melhor visualização */
+  #map {
+    height: 300px;
   }
 }
