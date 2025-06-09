@@ -1,4 +1,3 @@
-// Inicializa o mapa no mundo
 const map = L.map('map').setView([0, 0], 2);
 
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -11,17 +10,6 @@ const imageList = document.getElementById('image-list');
 const message = document.getElementById('messages-section');
 
 let markers = [];
-
-function convertDMSToDD(dms, ref) {
-  const degrees = dms[0];
-  const minutes = dms[1];
-  const seconds = dms[2];
-  let dd = degrees + minutes / 60 + seconds / 3600;
-  if (ref === 'S' || ref === 'W') {
-    dd = -dd;
-  }
-  return dd;
-}
 
 function clearMarkers() {
   markers.forEach(m => map.removeLayer(m));
@@ -39,38 +27,35 @@ fileInput.addEventListener('change', async () => {
   let anyLocationFound = false;
 
   for (const file of files) {
-    // lê EXIF direto do arquivo usando exifr
-    let tags = null;
     try {
-      tags = await exifr.parse(file, { gps: true, tiff: true, ifd0: true, exif: true });
-    } catch (e) {
-      console.error('Erro ao ler EXIF:', e);
-    }
+      const tags = await exifr.parse(file);
 
-    // cria imagem na galeria
-    const img = document.createElement('img');
-    img.src = URL.createObjectURL(file);
-    img.alt = file.name;
-    imageList.appendChild(img);
+      // Adiciona imagem na galeria
+      const img = document.createElement('img');
+      img.src = URL.createObjectURL(file);
+      img.alt = file.name;
+      imageList.appendChild(img);
 
-    // extrai GPS e converte se existir
-    const lat = tags?.latitude;
-    const lon = tags?.longitude;
-    const dateTime = tags?.DateTimeOriginal || tags?.DateTime;
+      const lat = tags?.latitude;
+      const lon = tags?.longitude;
+      const dateTime = tags?.DateTimeOriginal || tags?.DateTime;
 
-    if (lat && lon) {
-      anyLocationFound = true;
+      if (lat && lon) {
+        anyLocationFound = true;
 
-      const marker = L.marker([lat, lon]).addTo(map);
+        const marker = L.marker([lat, lon]).addTo(map);
 
-      let popupText = `<strong>${file.name}</strong><br>Latitude: ${lat.toFixed(5)}<br>Longitude: ${lon.toFixed(5)}`;
-      if (dateTime) {
-        popupText += `<br>Data/Hora: ${dateTime}`;
+        let popupText = `<strong>${file.name}</strong><br>Latitude: ${lat.toFixed(5)}<br>Longitude: ${lon.toFixed(5)}`;
+        if (dateTime) {
+          popupText += `<br>Data/Hora: ${dateTime}`;
+        }
+        marker.bindPopup(popupText);
+        markers.push(marker);
+      } else {
+        console.log(`Arquivo "${file.name}" não tem dados GPS.`);
       }
-      marker.bindPopup(popupText);
-      markers.push(marker);
-    } else {
-      console.log(`Arquivo "${file.name}" não tem dados GPS.`);
+    } catch (e) {
+      console.error(`Erro lendo EXIF do arquivo ${file.name}`, e);
     }
   }
 
