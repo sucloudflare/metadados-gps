@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Leitor de EXIF com Mapa</title>
+  <link rel="stylesheet" href="styles.css" />
+  <!-- CSS do Leaflet no head -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+</head>
+<body>
+
+  <!-- Cabeçalho principal -->
+  <header role="banner">
+    <h1>📸 Leitor de Imagens com Localização no Mapa</h1>
+    <p>Veja onde suas fotos foram tiradas usando os dados de localização.</p>
+  </header>
+
+  <main role="main">
+
+    <!-- Tutorial passo a passo -->
+    <section id="tutorial" aria-labelledby="tutorial-title">
+      <h2 id="tutorial-title">🧑‍🏫 Como usar</h2>
+      <ol>
+        <li>Clique no botão <strong>"Selecionar Imagens"</strong>.</li>
+        <li>Escolha <strong>1 ou mais fotos</strong> tiradas com o GPS ativado.</li>
+        <li>As imagens aparecerão abaixo, com a localização mostrada no mapa.</li>
+        <li>Se o local não aparecer, a foto pode não ter dados de localização.</li>
+      </ol>
+    </section>
+
+    <!-- Explicação sobre metadados e fotos -->
+    <section id="metadata-info" aria-labelledby="metadata-info-title">
+      <h2 id="metadata-info-title">ℹ️ Sobre Fotos e Metadados de Localização</h2>
+      <p>
+        As fotos que mostram a localização no mapa são aquelas tiradas com o celular, porque elas possuem <strong>metadados</strong> — informações embutidas na imagem que incluem o local (GPS), data, hora e outros detalhes.
+      </p>
+      <p>
+        Para que o sistema funcione, é importante enviar as imagens originais diretamente do seu celular ou câmera, sem passar por aplicativos ou redes sociais que costumam remover esses metadados por privacidade e compressão.
+      </p>
+      <p>
+        Por isso, fotos baixadas do WhatsApp, Instagram, Facebook ou outras redes sociais geralmente não têm esses dados de localização, e o mapa pode não mostrar nada.
+      </p>
+      <p>
+        Você pode usar fotos tiradas com o celular (geralmente em formatos JPG ou JPEG) com o GPS ativado na câmera para garantir que os metadados estejam presentes.
+      </p>
+      <p>
+        <strong>Metadados</strong> são dados ocultos na imagem que incluem informações técnicas, como a câmera usada, configurações, data, hora e, se disponível, a localização GPS onde a foto foi tirada.
+      </p>
+      <p>
+        Nas redes sociais e aplicativos de mensagens, por questões de segurança e privacidade, os metadados costumam ser removidos para proteger a localização e outras informações pessoais.
+      </p>
+      <p style="background-color: #fff3cd; border: 1px solid #ffeeba; padding: 10px; border-radius: 5px;">
+  ⚠️<strong>Importante:</strong> <strong>Caso, você queira foto do amigo!</strong> Se quiser garantir que os <strong>metadados de localização</strong> da imagem sejam mantidos, <strong>não envie a foto pela galeria (icone de enviar fotos) do WhatsApp</strong>. Em vez disso, envie a imagem como <strong>documento (icone de enviar PDF)</strong> no WhatsApp ou, preferencialmente, envie por <strong>e-mail</strong> como anexo. Assim, os dados de GPS da imagem serão preservados e o sistema poderá mostrar corretamente o local no mapa.
+</p>
+
+    </section>
+
+    <!-- Upload de imagens -->
+    <section id="upload-section" aria-label="Upload de imagens">
+      <h2>📤 Selecione suas Imagens</h2>
+      <input type="file" id="file-input" accept="image/*" multiple aria-label="Selecionar imagens">
+      <p class="note">Formatos suportados: JPG, JPEG, PNG. GPS precisa estar ativado na câmera.</p>
+    </section>
+
+    <!-- Galeria das imagens carregadas -->
+    <section id="images-section" aria-labelledby="images-title">
+      <h2 id="images-title">🖼️ Imagens Carregadas</h2>
+      <div id="image-list" class="image-gallery" aria-live="polite"></div>
+    </section>
+
+    <!-- Mapa interativo com marcadores -->
+    <section id="map-section" aria-labelledby="map-title">
+      <h2 id="map-title">🗺️ Localização no Mapa</h2>
+      <div id="map" role="region" aria-label="Mapa de localização das fotos"></div>
+    </section>
+
+    <!-- Área para mensagens, erros ou alertas -->
+    <section id="messages-section" aria-live="assertive">
+      <div id="message"></div>
+    </section>
+
+  </main>
+
+  <!-- Scripts -->
+  <script src="https://unpkg.com/exif-js"></script>
+  <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+  <script src="script.js"></script>
+
+</body>
+</html>

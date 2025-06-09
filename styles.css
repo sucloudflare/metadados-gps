@@ -1,0 +1,146 @@
+/* Reset básico */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Fonte geral */
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #f9fafb;
+  color: #333;
+  line-height: 1.6;
+  padding: 20px;
+}
+
+/* Cabeçalho */
+header {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+header h1 {
+  font-size: 2.5rem;
+  color: #2c3e50;
+  margin-bottom: 0.3em;
+}
+
+header p {
+  font-size: 1.1rem;
+  color: #555;
+}
+
+/* Seções */
+section {
+  background: #fff;
+  padding: 20px 25px;
+  margin-bottom: 25px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgb(0 0 0 / 0.05);
+}
+
+/* Títulos das seções */
+section h2 {
+  font-size: 1.8rem;
+  color: #34495e;
+  margin-bottom: 15px;
+  border-bottom: 2px solid #2980b9;
+  padding-bottom: 5px;
+}
+
+/* Lista ordenada do tutorial */
+#tutorial ol {
+  padding-left: 20px;
+  list-style-type: decimal;
+  color: #2c3e50;
+}
+
+#tutorial ol li {
+  margin-bottom: 10px;
+  font-size: 1.1rem;
+}
+
+/* Input de arquivo */
+#file-input {
+  display: block;
+  font-size: 1rem;
+  padding: 10px;
+  border: 2px dashed #2980b9;
+  border-radius: 6px;
+  width: 100%;
+  cursor: pointer;
+  transition: border-color 0.3s ease;
+}
+
+#file-input:hover {
+  border-color: #3498db;
+}
+
+/* Nota sobre formatos */
+.note {
+  font-size: 0.9rem;
+  color: #7f8c8d;
+  margin-top: 8px;
+  font-style: italic;
+}
+
+/* Galeria de imagens */
+.image-gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: 15px;
+}
+
+.image-gallery img {
+  width: 100%;
+  border-radius: 6px;
+  box-shadow: 0 2px 6px rgb(0 0 0 / 0.1);
+  object-fit: cover;
+  height: 120px;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.image-gallery img:hover {
+  transform: scale(1.05);
+  box-shadow: 0 4px 10px rgb(0 0 0 / 0.2);
+}
+
+/* Mapa */
+#map {
+  height: 400px;
+  width: 100%;
+  border-radius: 8px;
+  border: 2px solid #2980b9;
+  box-shadow: 0 3px 8px rgb(0 0 0 / 0.1);
+}
+
+/* Mensagens */
+#messages-section {
+  min-height: 2em;
+  margin-top: 15px;
+  color: #c0392b;
+  font-weight: 600;
+  font-size: 1rem;
+  text-align: center;
+}
+
+/* Responsividade */
+@media (max-width: 600px) {
+  header h1 {
+    font-size: 1.8rem;
+  }
+
+  section h2 {
+    font-size: 1.4rem;
+  }
+
+  .image-gallery {
+    grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
+  }
+
+  .image-gallery img {
+    height: 80px;
+  }
+}
