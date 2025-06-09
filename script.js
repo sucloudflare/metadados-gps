@@ -89,6 +89,12 @@ fileInput.addEventListener('change', () => {
         if (anyLocationFound) {
           const group = new L.featureGroup(markers);
           map.fitBounds(group.getBounds().pad(0.5));
+          
+          // Força o mapa a atualizar o tamanho — ajuda no mobile
+          setTimeout(() => {
+            map.invalidateSize();
+          }, 200);
+          
         } else {
           message.textContent = 'Nenhuma localização GPS encontrada nas fotos selecionadas.';
           map.setView([0, 0], 2);
