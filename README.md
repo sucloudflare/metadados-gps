@@ -54,5 +54,25 @@
 
   <hr />
 
+   <h2>Solução para Problemas - Se Travar na Análise de TCP</h2>
+        <h3>Possíveis Causas</h3>
+        <ul>
+            <li><strong>Dispositivo Ativo com Resposta Lenta:</strong> O dispositivo (ex.: 192.168.10.100) pode estar ativo, mas respondendo lentamente devido a alta carga, firewall ativo ou configuração de portas que exige mais tempo para análise pelo Nmap.</li>
+            <li><strong>Firewall ou Filtragem:</strong> Um firewall no dispositivo ou na rede pode estar bloqueando ou retardando as requisições, causando timeouts.</li>
+            <li><strong>Portas em Estado Intermediário:</strong> Portas "filtered" ou "closed" podem exigir mais tentativas, aumentando o tempo de escaneamento.</li>
+            <li><strong>Problema de Conexão:</strong> Instabilidade, latência ou perda de pacotes pode afetar apenas esse IP.</li>
+            <li><strong>Configuração do Nmap:</strong> A varredura padrão (1-1024) pode não ser otimizada, causando atrasos.</li>
+        </ul>
+        <h3>Solução</h3>
+        <ul>
+            <li>Ajuste a função <code>get_tcp_info</code> no código para usar opções mais rápidas: <code>nm.scan(ip, '1-100', arguments='-T4 --max-retries 2')</code>.</li>
+            <li>Teste manualmente com: <code>sudo nmap -p 1-1024 -T4 192.168.10.100</code>.</li>
+            <li>Reinicie o escaneamento após ajustar.</li>
+        </ul>
+    </div>
+
+
+
+  
   <h3>✉️ Contato</h3>
   <p>Se você tiver dúvidas, sugestões ou quiser contribuir, envie um e-mail ou abra uma issue!</p>
